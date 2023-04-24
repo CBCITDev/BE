@@ -17,7 +17,7 @@ public class GreetingResourceTest {
           .when().get()
           .then()
              .statusCode(200)
-             .body(is("Hello from RESTEasy Reactive"));
+             .body(is( "{\"message\":\"Hello from RESTEasy Reactive\"}")); 
     }
 
 }

@@ -14,14 +14,15 @@ public class GreetingResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String hello() {
-        return "{ \"messageText\": \"Hello from RESTEasy Reactive\" }";
+    public Message hello() {
+        return new Message();
+        // return "{ \"messageText\": \"Hello from RESTEasy Reactive\" }";
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/greeting/{name}")
-    public String greeting(String name) {
+    public Message greeting(String name) {
         return service.greeting(name);
     }
 }

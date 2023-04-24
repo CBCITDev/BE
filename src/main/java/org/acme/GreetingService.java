@@ -5,9 +5,9 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class GreetingService {
 
-    public String greeting(String name) {
-        return 
-        "{ \"messageText\": \"Hello " + name+ "\" }";
+    public Message greeting(String name) {
+        return new Message(name);
+        // "{ \"messageText\": \"Hello " + name+ "\" }";
     }
 
 }

@@ -13,6 +13,6 @@ public class GreetingServiceTest {
 
     @Test
     public void testGreetingEndpoint() {
-        assertEquals("hello testname", service.greeting("testname"));
+        assertEquals( "Hello testname", service.greeting("testname").getMessage());
     }
 }
