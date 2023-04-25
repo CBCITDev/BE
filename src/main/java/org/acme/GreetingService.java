@@ -7,7 +7,6 @@ public class GreetingService {
 
     public Message greeting(String name) {
         return new Message(name);
-        // "{ \"messageText\": \"Hello " + name+ "\" }";
     }
 
 }

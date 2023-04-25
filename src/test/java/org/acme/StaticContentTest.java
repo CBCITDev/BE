@@ -23,7 +23,7 @@ public class StaticContentTest {
     public void testHello() throws IOException{
         try (InputStream in = urlHello.openStream()) {
             String contents = new String(in.readAllBytes(), StandardCharsets.UTF_8);
-            Assertions.assertEquals("{\"message\":\"Hello from RESTEasy Reactive\"}", contents);;
+            Assertions.assertEquals("{\"message\":\"Hello from RESTEasy Reactive\"}", contents);
         }
     }
 }
