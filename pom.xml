@@ -129,6 +129,10 @@
         <skipITs>false</skipITs>
         <quarkus.package.type>native</quarkus.package.type>
       </properties>
+      <properties>
+        <sonar.organization>cbcitdev</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+      </properties>  
     </profile>
   </profiles>
 </project>
