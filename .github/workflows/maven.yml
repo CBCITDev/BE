@@ -45,6 +45,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run:  mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CBCITDev_BE
     - name: Code coverage
+      id: coverage
       run: awk -F "," '
               {
                 instructions += $4 + $5; covered += $5
@@ -52,8 +53,19 @@ jobs:
               END {
                 print covered, "/", instructions, "instructions covered";
                 printf "%.2f%% covered\n", covered / instructions * 100
-              }' target/jacoco-report/jacoco.csv
-  
-      
+              }' target/jacoco-report/jacoco.csv 
+    - name: check coverage acceptance
+      if: awk -F "," '
+              {
+                instructions += $4 + $5; covered += $5
+              }
+              END {
+                covered / instructions * 100 > 80
+              }' target/jacoco-report/jacoco.csv 
+      uses: actions/github-script@v3
+      with:
+        script: |
+            core.setFailed('Code coverage not high enough!')
+
 
   
