@@ -59,9 +59,7 @@ jobs:
           var="$(awk -F "," '
               {
                 instructions += $4 + $5; covered += $5
-              }
-              END {
-                printf "%.2f%%", covered / instructions * 100 
+                printf "%.2f%%", covered / instructions * 100
               }' target/jacoco-report/jacoco.csv)"
           echo "code_coverage=$var" >> $GITHUB_OUTPUT
     - name: check coverage acceptance
