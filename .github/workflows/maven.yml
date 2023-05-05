@@ -61,9 +61,8 @@ jobs:
                 instructions += $4 + $5; covered += $5
               }
               END {
-                covered / instructions * 100 
+                printf "%.2f%%", covered / instructions * 100 
               }' target/jacoco-report/jacoco.csv)"
-          echo "$var"
           echo "code_coverage=$var" >> $GITHUB_OUTPUT
     - name: check coverage acceptance
       if: ${{ steps.coverage.outputs.code_coverage <= 80 }}
