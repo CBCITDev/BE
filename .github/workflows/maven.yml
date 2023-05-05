@@ -52,18 +52,13 @@ jobs:
               }
               END {
                 print covered, "/", instructions, "instructions covered";
-                printf "%.2f%% covered\n", covered / instructions * 100
+                code_coverage=covered / instructions * 100 >> $GITHUB_OUTPUT
+                printf "%.2f%% covered\n", covered / instructions * 100 
               }' target/jacoco-report/jacoco.csv 
     - name: check coverage acceptance
-      if: awk -F "," '
-              {
-                instructions += $4 + $5; covered += $5
-              }
-              END {
-                covered / instructions * 100 > 80
-              }' target/jacoco-report/jacoco.csv 
+      if: ${{ steps.coverage.outputs.code_coverage > 80 }}
       uses: actions/github-script@v3
-      with:
+      with: 
         script: |
             core.setFailed('Code coverage not high enough!')
 
