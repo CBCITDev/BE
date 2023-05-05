@@ -43,7 +43,16 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CBCITDev_BE
+      run:  mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CBCITDev_BE
+            awk -F "," '
+              {
+                instructions += $4 + $5; covered += $5
+              }
+              END {
+                print covered, "/", instructions, "instructions covered";
+                printf "%.2f%% covered\n", covered / instructions * 100
+              }' "$1" 
+  
       
 
   
