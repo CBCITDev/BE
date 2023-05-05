@@ -52,7 +52,8 @@ jobs:
               }
               END {
                 print covered, "/", instructions, "instructions covered";
-                echo "code_coverage=covered / instructions * 100" >> $GITHUB_OUTPUT
+                coverage = covered / instructions * 100
+                echo "code_coverage=$coverage" >> $GITHUB_OUTPUT
                 printf "%.2f%% covered\n", covered / instructions * 100 
               }' target/jacoco-report/jacoco.csv 
     - name: check coverage acceptance
