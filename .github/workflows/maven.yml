@@ -63,8 +63,9 @@ jobs:
               END {
                 printf "%.2f%%", covered / instructions * 100 
               }' target/jacoco-report/jacoco.csv)"
-          echo "code_coverage=$var" >> $GITHUB_OUTPUT
-          echo ${var}
+          echo "code_coverage=${var}" >> $GITHUB_OUTPUT
+    - name: check if github output was set correctly
+      run: echo "The code coverage was set to ${{ steps.coverage.outputs.code_coverage}}"
     - name: check coverage acceptance
       if: ${{ steps.coverage.outputs.code_coverage <= 80 }}
       uses: actions/github-script@v3
