@@ -72,10 +72,8 @@ jobs:
                 instructions += $4 + $5; covered += $5
               }
               END {
-                print instructions;
-                print "-";
-                print covered
-              }' target/jacoco-report/jacoco.csv)"
+                print covered, "/", instructions; 
+              }' target/jacoco-report/jacoco.csv"
           covered=${var%-*}
           instructions=${var##*-}
           covered=${covered} / ${instructions} * 100
