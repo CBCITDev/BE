@@ -73,7 +73,7 @@ jobs:
               }
               END {
                 print instructions;
-                print covered;
+                print covered
               }' target/jacoco-report/jacoco.csv)
           var=covered / instructions * 100
           echo "code_coverage=${var}" >> $GITHUB_OUTPUT
