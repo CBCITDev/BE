@@ -67,18 +67,11 @@ jobs:
     - name: optimizing code coverage steps 
       id: coverage2
       run: |
-          var="$(awk -F "," '
-              {
-                instructions += $4 + $5; covered += $5
-              }
-              END {
-                print covered, "/", instructions
-              }' target/jacoco-report/jacoco.csv)" 
-          covered=${var%-*}
-          instructions=${var##*/}
-          coverage=${covered} / ${instructions} * 100
+          lines="$(awk -F "," '{instructions += $4 + $5} END {print instructions}' target/jacoco-report/jacoco.csv)"
+          covered="$(awk -F "," '{covered += $5} END {print covered}' target/jacoco-report/jacoco.csv)"
+          coverage=${covered} / ${lines} * 100
           echo "code_coverage=${coverage}" >> $GITHUB_OUTPUT
-          echo ${covered} "/" ${instructions}
+          echo ${covered} "/" ${lines}
           printf "code coverage: " %.2f "${coverage}"
     - name: check coverage acceptance
       if: ${{ steps.coverage.outputs.code_coverage <= 80 }}
