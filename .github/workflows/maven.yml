@@ -59,6 +59,7 @@ jobs:
           var="$(awk -F "," '
               {
                 instructions += $4 + $5; covered += $5;
+                printf "%d", instructions
                 coverage = covered / instructions * 100;
                 printf "%.2f%%", coverage
               }' target/jacoco-report/jacoco.csv)"
