@@ -67,16 +67,19 @@ jobs:
     - name: optimizing code coverage steps 
       id: coverage2
       run: |
-          read instructions covered <<< $(awk -F "," '
+          var="$(awk -F "," '
               {
                 instructions += $4 + $5; covered += $5
               }
               END {
                 print instructions;
+                print "-";
                 print covered
-              }' target/jacoco-report/jacoco.csv)
-          var=covered / instructions * 100
-          echo "code_coverage=${var}" >> $GITHUB_OUTPUT
+              }' target/jacoco-report/jacoco.csv)"
+          covered=${var%-*}
+          instructions=${var##*-}
+          covered=${covered} / ${instructions} * 100
+          echo "code_coverage=${covered}" >> $GITHUB_OUTPUT
           echo "instructions: ${instructions}"
           echo "covered: ${covered}"
           printf "code coverage: " %.2f "${coverage}"
