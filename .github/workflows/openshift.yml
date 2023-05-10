@@ -144,7 +144,7 @@ jobs:
         path_context: '.'
       # Builder image for a java project
         builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
-        image: ${{  env.APP_NAME }}
+        image: 'rhel7'
   
     # https://github.com/redhat-actions/buildah-build#readme
     - name: Build from Dockerfile
