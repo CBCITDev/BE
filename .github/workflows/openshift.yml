@@ -149,7 +149,18 @@ jobs:
         # Otherwise, point this to your Dockerfile/Containerfile relative to the repository root.
         #dockerfiles: |
         #  ./Dockerfile
-        
+      #display-variables:
+    - name: Use variables
+      run: |
+        echo "repository variable : $REPOSITORY_VAR"
+        echo "organization variable : $ORGANIZATION_VAR"
+        echo "overridden variable : $OVERRIDE_VAR"
+        echo "variable from shell environment : $env_var"
+      env:
+        REPOSITORY_VAR: ${{ vars.REPOSITORY_VAR }}
+        ORGANIZATION_VAR: ${{ vars.ORGANIZATION_VAR }}
+        OVERRIDE_VAR: ${{ vars.OVERRIDE_VAR }}
+           
     # https://github.com/redhat-actions/push-to-registry#readme
     - name: Push to registry
       id: push-image
