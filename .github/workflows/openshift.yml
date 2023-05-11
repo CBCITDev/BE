@@ -141,7 +141,7 @@ jobs:
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        base_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
+        base-image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
         image: ${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
 
