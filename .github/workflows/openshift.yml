@@ -137,7 +137,7 @@ jobs:
         echo "IMAGE_TAGS=latest ${GITHUB_SHA::12}" | tee -a $GITHUB_ENV
         
     # https://github.com/redhat-actions/buildah-build#readme
-    - name: uild image without Containerfile
+    - name: Build image without Containerfile
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
@@ -152,14 +152,9 @@ jobs:
       #display-variables:
     - name: Use variables
       run: |
-        echo "repository variable : $REPOSITORY_VAR"
-        echo "organization variable : $ORGANIZATION_VAR"
-        echo "overridden variable : $OVERRIDE_VAR"
-        echo "variable from shell environment : $env_var"
-      env:
-        REPOSITORY_VAR: ${{ vars.REPOSITORY_VAR }}
-        ORGANIZATION_VAR: ${{ vars.ORGANIZATION_VAR }}
-        OVERRIDE_VAR: ${{ vars.OVERRIDE_VAR }}
+        echo "registry:"  ${{ env.IMAGE_REGISTRY }}
+        echo "username:" ${{ env.IMAGE_REGISTRY_USER }}
+        echo "password:" ${{ env.IMAGE_REGISTRY_PASSWORD }}"
            
     # https://github.com/redhat-actions/push-to-registry#readme
     - name: Push to registry
