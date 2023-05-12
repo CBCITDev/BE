@@ -154,7 +154,7 @@ jobs:
       run: |
         echo "registry:"  ${{ env.IMAGE_REGISTRY }}
         echo "username:" ${{ env.IMAGE_REGISTRY_USER }}
-        echo "password:" ${{ env.IMAGE_REGISTRY_PASSWORD }}"
+        echo "password:" ${{ env.IMAGE_REGISTRY_PASSWORD }}
            
     # https://github.com/redhat-actions/push-to-registry#readme
     - name: Push to registry
