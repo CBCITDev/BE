@@ -168,7 +168,10 @@ jobs:
         password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
 
     # The path the image was pushed to is now stored in ${{ steps.push-image.outputs.registry-path }}
-
+    - name: Show image  
+      run:
+        echo "Image in:" ${{ steps.push-image.outputs.registry-path }}
+        
     - name: Install oc
       uses: redhat-actions/openshift-tools-installer@v1
       with:
