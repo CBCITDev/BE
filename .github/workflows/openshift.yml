@@ -155,6 +155,8 @@ jobs:
         echo "registry:"  ${{ env.IMAGE_REGISTRY }}
         echo "username:" ${{ env.IMAGE_REGISTRY_USER }}
         echo "password:" ${{ env.IMAGE_REGISTRY_PASSWORD }}
+        echo "image:" ${{ steps.build-image.outputs.image }}
+        echo "tags:" ${{ steps.build-image.outputs.tags }}
            
     # https://github.com/redhat-actions/push-to-registry#readme
     - name: Push to registry
